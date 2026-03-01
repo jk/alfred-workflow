@@ -2,7 +2,6 @@
 
 namespace Alfred\Workflows;
 
-use SimpleXMLElement;
 
 class Result
 {
@@ -48,7 +47,7 @@ class Result
      */
     protected function setType($type, $verify_existence = true)
     {
-        if (in_array($type, ['default', 'file', 'file:skipcheck'])) {
+        if (in_array($type, ['default', 'file', 'file:skipcheck'], true)) {
             if ($type === 'file' && $verify_existence === false) {
                 $type = 'file:skipcheck';
             }
@@ -71,7 +70,7 @@ class Result
             'path' => $path,
         ];
 
-        if (in_array($type, ['fileicon', 'filetype'])) {
+        if (in_array($type, ['fileicon', 'filetype'], true)) {
             $this->icon['type'] = $type;
         }
 
@@ -118,7 +117,7 @@ class Result
      */
     protected function setText($type, $text)
     {
-        if (!in_array($type, ['copy', 'largetype'])) {
+        if (!in_array($type, ['copy', 'largetype'], true)) {
             return $this;
         }
 
@@ -157,7 +156,7 @@ class Result
      */
     protected function setMod($mod, $subtitle, $arg, $valid = true)
     {
-        if (!in_array($mod, ['shift', 'fn', 'ctrl', 'alt', 'cmd'])) {
+        if (!in_array($mod, ['shift', 'fn', 'ctrl', 'alt', 'cmd'], true)) {
             return $this;
         }
 
