@@ -47,11 +47,14 @@ class Workflow
     public function sortResults($direction = 'asc', $property = 'title')
     {
         usort($this->results, function ($a, $b) use ($direction, $property) {
+            $aValue = (string) $a->$property;
+            $bValue = (string) $b->$property;
+
             if ($direction === 'asc') {
-                return $a->$property > $b->$property;
+                return $aValue <=> $bValue;
             }
 
-            return $a->$property < $b->$property;
+            return $bValue <=> $aValue;
         });
 
         return $this;
@@ -93,9 +96,9 @@ class Workflow
                         }, array_values($this->results)),
         ];
 
-        if(!empty($this->variables)){
+        if (!empty($this->variables)) {
             $output['variables'] = $this->variables;
-        };
+        }
 
         return json_encode($output);
     }
